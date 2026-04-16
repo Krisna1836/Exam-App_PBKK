@@ -1,0 +1,10 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Pilih Materi</h2>
+
+<div class="grid">
+  {% for m in materials %}
+  <a href="{% url 'username' m.key %}" class="card"> {{ m.name }} </a>
+  {% endfor %}
+</div>
+
+{% endblock %}

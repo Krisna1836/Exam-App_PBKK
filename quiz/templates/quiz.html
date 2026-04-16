@@ -1,0 +1,50 @@
+{% extends 'base.html' %} {% block content %}
+
+<h2>Quiz - {{ material }}</h2>
+
+<!-- ✅ TAMPILKAN USERNAME -->
+<p style="margin-bottom: 20px">
+  👤 Username: <b>{{ request.GET.username }}</b>
+</p>
+
+<form id="quizForm" method="POST" action="{% url 'result' %}">
+  {% csrf_token %}
+
+  <!-- ✅ Hidden cukup sekali -->
+  <input type="hidden" name="username" value="{{ request.GET.username }}" />
+
+  {% for q in questions %}
+  <div class="question">
+    <p><b>{{ forloop.counter }}. {{ q.question }}</b></p>
+
+    {% for opt in q.options %}
+    <label>
+      <input type="radio" name="q{{ q.id }}" value="{{ opt }}" />
+      {{ opt }} </label
+    ><br />
+    {% endfor %}
+  </div>
+  {% endfor %}
+
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  document.getElementById('quizForm').addEventListener('submit', function(e) {
+      const total = {{ questions|length }};
+      let answered = 0;
+
+      for (let i = 1; i <= total; i++) {
+          if (document.querySelector(`input[name="q${i}"]:checked`)) {
+              answered++;
+          }
+      }
+
+      if (answered < total) {
+          e.preventDefault();
+          alert("Semua soal wajib diisi!");
+      }
+  });
+</script>
+
+{% endblock %}

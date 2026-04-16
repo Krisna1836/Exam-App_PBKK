@@ -1,0 +1,8 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Masukkan Username</h2>
+
+<form method="GET" action="/quiz/{{ material }}/">
+  <input type="text" name="username" placeholder="Username" required />
+  <button type="submit">Mulai</button>
+</form>
+{% endblock %}
