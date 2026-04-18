@@ -1,8 +1,14 @@
 {% extends 'base.html' %} {% block content %}
 <h2>Hasil Quiz</h2>
 
-<p>Benar: {{ correct }}</p>
-<p>Salah: {{ wrong }}</p>
+<p>👤 Username: <b>{{ username }}</b></p>
+<p>📚 Materi: <b>{{ material }}</b></p>
+<hr>
+<p>✅ Benar: <b>{{ correct }}</b> dari {{ total }} soal</p>
+<p>❌ Salah: <b>{{ wrong }}</b></p>
+<p>🏆 Skor: <b>{{ score }}</b>/100</p>
 
-<a href="/">Kembali</a>
+<br>
+<a href="/">Kembali ke Home</a> |
+<a href="{% url 'history' %}">Lihat History</a>
 {% endblock %}
